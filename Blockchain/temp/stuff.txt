@@ -1,0 +1,41 @@
+def sortTx(self):
+
+    for tx in Blockchain.uncTx:
+
+      if tx == "Data":
+
+        if Blockchain.uncTx["Data"] not in Blockchain.accounts:
+
+          Blockchain.accounts.update({Blockchain.uncTx["Data"]:0})
+
+          self.transactions.append(str(Blockchain.uncTx))
+
+          self.pack()
+
+        
+     
+      elif tx == "Sender":
+     
+        if Blockchain.uncTx["Sender"] in Blockchain.accounts:
+        
+          senderBalance = Blockchain.accounts[Blockchain.uncTx["Sender"]] 
+          
+          newBalance = int(senderBalance) - int(Blockchain.uncTx["Amount"] + 1)
+          print(newBalance)
+          Blockchain.accounts.update({Blockchain.uncTx["Sender"]:newBalance})
+         
+          self.transactions.append(str(self.txCounter) + " " + str(Blockchain.uncTx) + ", ")
+
+          receiverBalance = Blockchain.accounts[Blockchain.uncTx["Receiver"]]
+
+          newBalance = (receiverBalance) + int(Blockchain.uncTx["Amount"])
+
+          Blockchain.accounts.update({Blockchain.uncTx["Receiver"]:newBalance})
+
+          self.transactions.append(str(self.txCounter) + " " + str(Blockchain.uncTx) + ", ")
+          self.pack()
+
+
+
+
+      
